@@ -4,10 +4,12 @@ import {createUser,deleteUser,getUsers, loginUserController} from "./auth.contro
 
 
 import {validateCreateUser, validateLoginUser} from "./auth.validator.js";
+import { isAdmin } from "../../middlewares/authorize.middleware.js";
+import {authenticate} from "../../middlewares/authenticate.middleware.js"
 
 const router = Router();
 
-router.post("/", validateCreateUser, createUser);
+router.post("/",authenticate, isAdmin, validateCreateUser, createUser);
 
 router.post("/login", validateLoginUser, loginUserController);
 
