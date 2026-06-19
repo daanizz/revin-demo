@@ -40,11 +40,35 @@ export const deleteUser =
     }
   };
 
+// export const loginUserController = async (req, res) => {
+//   try {
+//     const { email, password } = req.body;
+
+//     const result = await loginUserService(email,password);
+
+//     res.status(200).json({
+//       success: true,
+//       token: result.token,
+//       user: {
+//         id: result.user._id,
+//         name: result.user.name,
+//         email: result.user.email,
+//         role: result.user.role,
+//       },
+//     });
+//   } catch (error) {
+//     res.status(400).json({
+//       success: false,
+//       message: error.message,
+//     });
+//   }
+// };
+
 export const loginUserController = async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { identifier, password } = req.body;
 
-    const result = await loginUserService(email,password);
+    const result = await loginUserService(identifier,password);
 
     res.status(200).json({
       success: true,
@@ -53,6 +77,7 @@ export const loginUserController = async (req, res) => {
         id: result.user._id,
         name: result.user.name,
         email: result.user.email,
+        phone: result.user.phone,
         role: result.user.role,
       },
     });

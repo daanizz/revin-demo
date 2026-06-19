@@ -12,6 +12,11 @@ export const fetchUsers=async()=>{
     return User.find();
 }
 
-export const getUser=async(email)=>{
-  return User.findOne({email});
-}
+export const findUserByIdentifier = async (identifier) => {
+  return User.findOne({
+    $or: [
+      { email: identifier },
+      { phone: identifier.replace(/\D/g,"").slice(-10) },
+    ],
+  });
+};
